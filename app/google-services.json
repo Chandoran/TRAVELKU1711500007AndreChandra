@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "105589681146",
+    "firebase_url": "https://uts-andrechandra-d64fe.firebaseio.com",
+    "project_id": "uts-andrechandra-d64fe",
+    "storage_bucket": "uts-andrechandra-d64fe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:105589681146:android:2134fdff08ec4318539243",
+        "android_client_info": {
+          "package_name": "com.example.uts_amub_ti7a_1711500007_andrechandra"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "105589681146-lggn80cso12uah57q4u7ini82jr4c6uv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.uts_amub_ti7a_1711500007_andrechandra",
+            "certificate_hash": "5096628812fd442e18064db379d6d5d0103c06fa"
+          }
+        },
+        {
+          "client_id": "105589681146-pl7tab7m984f2o7e01vakrbspi3d0cd0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJDvPFi6TgfZRyzbKhev2S5Ma18U0iv90"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "105589681146-pl7tab7m984f2o7e01vakrbspi3d0cd0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
