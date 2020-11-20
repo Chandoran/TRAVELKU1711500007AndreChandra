@@ -39,27 +39,44 @@
             android:textSize="30sp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/pic_photo_register_user"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
 
-            android:src="@drawable/bulet"
-            android:visibility="visible"
-            tools:srcCompat="@drawable/common_google_signin_btn_icon_dark_focused"
-            tools:visibility="visible" />
+            <ImageView
+                android:id="@+id/pic_photo_register_user"
+                android:layout_width="57dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
 
-        <Button
-            android:id="@+id/btn_add_photo"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
 
-            android:layout_marginLeft="230dp"
-            android:background="@drawable/bulet"
-            android:text="+"
+                android:src="@drawable/bulet"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints"
+                tools:srcCompat="@drawable/common_google_signin_btn_icon_dark_focused"
+                tools:visibility="visible" />
 
-            android:textColor="#03dac5" />
+            <Button
+                android:id="@+id/btn_add_photo"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+
+                android:background="@drawable/bulet"
+
+                android:text="+"
+                android:textColor="#03dac5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.547"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.8"
+                tools:ignore="MissingConstraints" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/textView8"
