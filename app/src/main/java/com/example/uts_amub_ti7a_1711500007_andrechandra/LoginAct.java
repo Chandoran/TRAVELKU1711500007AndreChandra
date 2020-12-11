@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,9 +25,11 @@ public class LoginAct extends AppCompatActivity {
     Button login2,register;
     EditText username2, password2;
 
-    //DatabaseReference reference;
-    //String USERNAME_KEY = " usernamekey";
-    //String username_key = "";
+    DatabaseReference reference;
+    String USERNAME_KEY = " usernamekey";
+    String username_key = "";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,38 +52,71 @@ public class LoginAct extends AppCompatActivity {
             }
         });
 
- /*
-        //menyimpan data kepada localstorage (handphone)
-        SharedPreferences sharedPreferences =getSharedPreferences(USERNAME_KEY, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(username_key,username2.getText().toString()); //mengambil data inputan username disimpan ke variabel username_key
-        editor.apply();
-
-        //proses SIMPAN KE DATABASE FIREBASE
-        reference = FirebaseDatabase.getInstance().getReference().child("Users").child(username2.getText().toString());
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+        login2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                dataSnapshot.getRef().child("username").setValue(username2.getText().toString());
-                dataSnapshot.getRef().child("password").setValue(password2.getText().toString());
-                //dataSnapshot.getRef().child("email").setValue(email.getText().toString());
-                dataSnapshot.getRef().child("saldo").setValue(100000);
-            }
+            public void onClick(View v) {
+                login2.setEnabled(false);
+                login2.setText("Loading ...");
+                final  String username = username2.getText().toString();
+                final String password = password2.getText().toString();
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                if(username.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Username kosong!", Toast.LENGTH_SHORT).show();
+                    //ubah state menjadi loading
+                    login2.setEnabled(true);
+                    login2.setText("SIGN IN");
+                }
+                else {
+                    if (password.isEmpty()) {
+                        Toast.makeText(getApplicationContext(), "Password kosong!", Toast.LENGTH_SHORT).show();
+                        login2.setEnabled(true);
+                        login2.setText("SIGN IN");
+                    }
+                    else {
+                        reference =  FirebaseDatabase.getInstance().getReference().child("User/Andre");
+                        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    //ambil data password dari firebase
+                                    String passwordFromFirebase = dataSnapshot.child("password").getValue().toString();
 
+                                     //validasi  password dgn password firebase
+                                    if (password.equals(passwordFromFirebase)){
+                                        //simpan username (key) kepada local
+                                        SharedPreferences sharedPreferences = getSharedPreferences(USERNAME_KEY, MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                                        editor.putString(username_key, username2.getText().toString());
+                                        editor.apply();
+                                        //berpindah activity
+                                        Intent gotohome = new Intent(LoginAct.this,HomeActivity.class);
+                                        startActivity(gotohome);
+                                    }
+                                    else {
+                                        Toast.makeText(getApplicationContext(), "Password salah", Toast.LENGTH_SHORT).show();
+                                        //ubah state menjadi loading
+                                        login2.setEnabled(true);
+                                        login2.setText("SIGN IN");
+                                    }
+
+                                    }
+                                /*else {
+                                    Toast.makeText(getApplicationContext(), "Username tidak ada", Toast.LENGTH_SHORT).show();
+                                    //ubah state menjadi loading
+                                    login2.setEnabled(true);
+                                    login2.setText("SIGN IN");
+                                } */
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                Toast.makeText(getApplicationContext(), "Database Error", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                }
             }
         });
-
-        //berpindah dari activity lain ke activity loginact
-        /*register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent gotologin = new Intent(RegisterAct.this, RegisterTwoAct.class);
-                startActivity(gotologin);
-            }
-        }); */
 
     }
 }
