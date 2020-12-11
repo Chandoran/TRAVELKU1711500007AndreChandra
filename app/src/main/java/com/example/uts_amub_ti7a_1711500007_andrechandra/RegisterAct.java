@@ -77,7 +77,7 @@ public class RegisterAct extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent gotologin = new Intent(RegisterAct.this, RegisterTwoAct.class);
-                startActivity(gotologin);
+                startActivity(gotologin); l
             }
         }); */
                 Intent gotonextregister = new Intent(RegisterAct.this, RegisterTwoAct.class);
